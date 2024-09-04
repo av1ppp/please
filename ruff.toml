@@ -1,0 +1,9 @@
+line-length = 120
+indent-width = 4
+cache-dir = "./.cache/ruff"
+
+[lint]
+ignore = ["E731", "F401"]
+
+[format]
+quote-style = "double"
