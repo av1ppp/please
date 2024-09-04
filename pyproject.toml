@@ -12,3 +12,7 @@ requires-python = ">=3.12"
 
 [project.scripts]
 pls = "please.cli:main"
+
+[project.urls]
+Homepage = "https://github.com/av1ppp/please"
+Issues = "https://github.com/av1ppp/please/issues"
