@@ -1,8 +1,17 @@
 from pathlib import Path
-from sys import argv
+from sys import argv, exit
+
+from pkg_resources import get_distribution
 
 from .internal.taskcontext import TaskContext
 from .internal.tasks import tasks
+
+dist = get_distribution("please")
+
+pleasefile_names = [
+    Path("Pleasefile.py"),
+    Path("Pleasefile"),
+]
 
 init_command = ["-i", "-init", "--init"]
 help_command = ["-h", "-help", "--help"]
@@ -34,18 +43,34 @@ def main():
         task(ctx)
         return
 
-    print(f"ERROR: Command or task '{args[0]}' not found. Try to use -h command.")
+    panic(f"Command or task '{args[0]}' not found. Try to use -h command.")
 
 
 def init_pleasefile():
-    raise NotImplementedError()
+    filename = pleasefile_names[0]
+    if filename.exists():
+        panic("Pleasefile already created")
+
+    with open(filename, mode="w") as file:
+        file.write(
+            """from please import TaskContext, task
+
+
+@task()
+def hello(ctx: TaskContext):
+    print("Hello world")
+"""
+        )
 
 
 def print_version():
-    raise NotImplementedError()
+    print("Please v" + dist.version)
 
 
 def print_help():
+    print("PLEASE - simple task runner.")
+    print()
+
     print("COMMANDS:")
     print_command(init_command, "Create empty Pleasefile")
     print_command(help_command, "Show this message")
@@ -59,12 +84,7 @@ def print_help():
 
 
 def load_pleasefile_if_exists():
-    filenames = [
-        Path("Pleasefile.py"),
-        Path("Pleasefile"),
-    ]
-
-    for filename in filenames:
+    for filename in pleasefile_names:
         if not filename.exists():
             continue
 
@@ -76,6 +96,11 @@ def load_pleasefile_if_exists():
 
 def print_command(command: list, description: str):
     print(help_indent + ", ".join(command).ljust(26, " ") + description)
+
+
+def panic(*values: object):
+    print("ERROR:", *values)
+    exit(1)
 
 
 if __name__ == "__main__":

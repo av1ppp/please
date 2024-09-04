@@ -9,6 +9,7 @@ authors = [{ name = "Avi Parampampam", email = "aviparampampam@gmail.com" }]
 description = "Simple task runner"
 readme = "README.md"
 requires-python = ">=3.12"
+dependencies = ["setuptools>=74.1.1"]
 
 [project.scripts]
 pls = "please.cli:main"
