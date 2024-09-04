@@ -51,10 +51,9 @@ def print_help():
     print_command(help_command, "Show this message")
     print_command(version_command, "Show version")
 
-    print()
-
-    print("TASKS:")
     if len(tasks) > 0:
+        print()
+        print("TASKS:")
         for task_name, _ in tasks.items():
             print(f"{help_indent}{task_name}")
 
