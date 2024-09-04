@@ -6,7 +6,7 @@ from pkg_resources import get_distribution
 from .internal.taskcontext import TaskContext
 from .internal.tasks import tasks
 
-dist = get_distribution("please")
+dist = get_distribution("please_av1ppp")
 
 pleasefile_names = [
     Path("Pleasefile.py"),

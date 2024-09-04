@@ -1,9 +1,11 @@
-from os import PathLike, environ
+from os import environ
+from pathlib import Path
+from typing import Union
 
-Path = str | bytes | PathLike[str] | PathLike[bytes]
+PathLike = Union[str, Path]
 
 
-def parseenv(path: Path):
+def parseenv(path: PathLike):
     env: dict[str, str] = dict()
 
     with open(path, mode="r") as file:
@@ -18,7 +20,7 @@ def parseenv(path: Path):
     return env
 
 
-def loadenv(path: Path):
+def loadenv(path: PathLike):
     env = parseenv(path)
     for key, value in env.items():
         environ[key] = value

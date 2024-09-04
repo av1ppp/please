@@ -1,16 +1,18 @@
-from collections.abc import Buffer
 from os import _Environ as Env
 from pathlib import Path
 from subprocess import run as subprocess_run
 from sys import stderr, stdout
+from typing import Dict, List, Optional, Union
+
+from typing_extensions import Buffer
 
 
 def shexec(
-    args: list[str | Path] | str | Path,
-    env: Env | dict | None = None,
-    cwd: Path | str | None = None,
-    timeout: float | None = None,
-    input: Buffer | None = None,
+    args: Union[List[Union[str, Path]], str, Path],
+    env: Optional[Union[Env, Dict]] = None,
+    cwd: Optional[Union[Path, str]] = None,
+    timeout: Optional[float] = None,
+    input: Optional[Buffer] = None,
     capture_output: bool = False,
 ):
     return subprocess_run(
@@ -27,7 +29,7 @@ def shexec(
     )
 
 
-def _build_args(args: list[str | Path] | str | Path) -> str:
+def _build_args(args: Union[List[Union[str, Path]], str, Path]) -> str:
     if isinstance(args, str):
         return args
     if isinstance(args, Path):

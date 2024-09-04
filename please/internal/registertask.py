@@ -1,8 +1,10 @@
+from typing import Optional
+
 from .taskfunc import TaskFunc
 from .tasks import tasks
 
 
-def register_task(name: str | None = None):
+def register_task(name: Optional[str] = None):
     def decorator(func: TaskFunc):
         nonlocal name
 
