@@ -1,4 +1,4 @@
-# Please
+# 🙏 Please
 
 Please is a simple task runner
 
