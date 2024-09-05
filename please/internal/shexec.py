@@ -4,15 +4,13 @@ from subprocess import run as subprocess_run
 from sys import stderr, stdout
 from typing import Dict, List, Optional, Union
 
-from typing_extensions import Buffer
-
 
 def shexec(
     args: Union[List[Union[str, Path]], str, Path],
     env: Optional[Union[Env, Dict]] = None,
     cwd: Optional[Union[Path, str]] = None,
     timeout: Optional[float] = None,
-    input: Optional[Buffer] = None,
+    input: Optional[bytes] = None,
     capture_output: bool = False,
 ):
     return subprocess_run(
