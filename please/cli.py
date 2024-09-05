@@ -13,9 +13,9 @@ pleasefile_names = [
     Path("Pleasefile"),
 ]
 
-init_command = ["-i", "-init", "--init"]
-help_command = ["-h", "-help", "--help"]
-version_command = ["-v", "-version", "--version"]
+init_command = ["-i", "-init"]
+help_command = ["-h", "-help"]
+version_command = ["-v", "-version"]
 
 help_indent = "    "
 
@@ -39,7 +39,7 @@ def main():
 
     if args[0] in tasks:
         task = tasks[args[0]]
-        ctx = TaskContext()
+        ctx = TaskContext(args[1:])
         task(ctx)
         return
 
@@ -57,8 +57,9 @@ def init_pleasefile():
 
 
 @task()
-def hello(ctx: TaskContext):
-    print("Hello world")
+def start(ctx: TaskContext):
+    mode = ctx.string("mode") or "prod"
+    print(f"*starting app in {mode} mode*")
 """
         )
 

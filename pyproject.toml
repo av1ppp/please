@@ -10,7 +10,7 @@ exclude = ["ruff.toml"]
 
 [project]
 name = "please_av1ppp"
-version = "0.0.2"
+version = "0.0.3"
 authors = [{ name = "Avi Parampampam", email = "aviparampampam@gmail.com" }]
 description = "Simple task runner"
 readme = "README.md"

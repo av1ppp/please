@@ -9,7 +9,7 @@
 </a>
 </p>
 
-Please is a simple task runner
+`Please` is a simple task runner using Python.
 
 ### Quick Start
 
@@ -28,7 +28,7 @@ pls -init
 Now you can run tasks for example with this command:
 
 ```sh
-pls hello
+pls start -mode=dev
 ```
 
 ---
