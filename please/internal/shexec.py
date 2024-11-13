@@ -6,7 +6,7 @@ from typing import Dict, List, Optional, Union
 
 
 def shexec(
-    args: Union[List[Union[str, Path]], str, Path],
+    args: Union[Union[List[str], List[Path]], str, Path],
     env: Optional[Union[Env, Dict]] = None,
     cwd: Optional[Union[Path, str]] = None,
     timeout: Optional[float] = None,
@@ -27,7 +27,7 @@ def shexec(
     )
 
 
-def _build_args(args: Union[List[Union[str, Path]], str, Path]) -> str:
+def _build_args(args: Union[Union[List[str], List[Path]], str, Path]) -> str:
     if isinstance(args, str):
         return args
     if isinstance(args, Path):
