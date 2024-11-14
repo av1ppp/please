@@ -19,6 +19,11 @@ First you need to install the package:
 pip install please-av1ppp
 ```
 
+> Or following [PEP 668](https://peps.python.org/pep-0668/):
+> ```
+> pip install please-av1ppp --user ----break-system-packages
+> ```
+
 Then go to your project directory and run 👇 to initialize `Pleasefile`
 
 ```sh
