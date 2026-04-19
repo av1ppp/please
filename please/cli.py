@@ -6,12 +6,12 @@ import sys
 
 sys.path.append("./")
 
-from pkg_resources import get_distribution
+from importlib.metadata import version
 
 from .internal.taskcontext import TaskContext
 from .internal.taskfunc import TaskFunc
 
-dist = get_distribution("please_av1ppp")
+ver = version("please_av1ppp")
 
 pleasefile_module = "Pleasefile"
 pleasefile_name = Path(pleasefile_module + ".py")
@@ -67,7 +67,7 @@ def start(ctx: please.TaskContext):
 
 
 def print_version():
-    print("Please v" + dist.version)
+    print("Please v" + ver)
 
 
 def print_help(tasks: Optional[Dict[str, TaskFunc]]):

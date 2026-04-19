@@ -10,11 +10,11 @@ exclude = ["ruff.toml"]
 
 [project]
 name = "please_av1ppp"
-version = "0.0.7"
+version = "0.0.8"
 authors = [{ name = "Avi Parampampam", email = "aviparampampam@gmail.com" }]
 description = "Simple task runner"
 readme = "README.md"
-requires-python = ">=3.8"
+requires-python = ">=3.14"
 dependencies = ["setuptools>=74.1.1"]
 
 [project.scripts]
