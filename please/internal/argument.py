@@ -1,15 +1,14 @@
 from dataclasses import dataclass
-from typing import List, Optional
 
 
 @dataclass()
 class Argument:
-    key: Optional[str]
+    key: str | None
     value: str
 
 
-def parse_args(args: List[str]) -> List[Argument]:
-    result: List[Argument] = []
+def parse_args(args: list[str]) -> list[Argument]:
+    result: list[Argument] = []
 
     for arg in args:
         if arg.startswith("-"):

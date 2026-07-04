@@ -1,18 +1,21 @@
-from os import _Environ as Env
+import typing
 from pathlib import Path
+from subprocess import CompletedProcess
 from subprocess import run as subprocess_run
 from sys import stderr, stdout
-from typing import Dict, List, Optional, Union
+
+if typing.TYPE_CHECKING:
+    from .types import Environment, PathLike
 
 
 def shexec(
-    args: Union[Union[List[str], List[Path]], str, Path],
-    env: Optional[Union[Env, Dict]] = None,
-    cwd: Optional[Union[Path, str]] = None,
-    timeout: Optional[float] = None,
-    input: Optional[bytes] = None,
+    args: list[PathLike] | PathLike,
+    env: Environment | None = None,
+    cwd: PathLike | None = None,
+    timeout: float | None = None,
+    input: bytes | None = None,
     capture_output: bool = False,
-):
+) -> CompletedProcess[bytes]:
     return subprocess_run(
         check=True,
         input=input,
@@ -27,14 +30,12 @@ def shexec(
     )
 
 
-def _build_args(args: Union[Union[List[str], List[Path]], str, Path]) -> str:
+def _build_args(args: list[PathLike] | PathLike) -> str:
     if isinstance(args, str):
         return args
     if isinstance(args, Path):
         return str(args)
-    if isinstance(args, list):
-        cmd = ""
-        for arg in args:
-            cmd += str(arg) + " "
-        return cmd
-    raise TypeError("invalid args type")
+    cmd = ""
+    for arg in args:
+        cmd += str(arg) + " "
+    return cmd

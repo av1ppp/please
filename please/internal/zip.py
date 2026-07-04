@@ -1,14 +1,14 @@
 import os
-from pathlib import Path
+import typing
+from shutil import make_archive
 from tarfile import open as open_tarfile
 from zipfile import ZipFile
-from typing import Union
-from shutil import make_archive
 
-StrOrPath = Union[str, Path]
+if typing.TYPE_CHECKING:
+    from .types import PathLike
 
 
-def zip_dir(in_dir: StrOrPath, out_path: StrOrPath):
+def zipdir(in_dir: PathLike, out_path: PathLike) -> None:
     make_archive(str(out_path), "zip", in_dir)
     #
     # with ZipFile(out_path, "w", ZIP_DEFLATED) as zipf:
@@ -26,12 +26,12 @@ def zip_dir(in_dir: StrOrPath, out_path: StrOrPath):
     #             zipf.write(file_path, file_path.relative_to(in_dir))
 
 
-def unzip(in_path: StrOrPath, out_path: StrOrPath):
+def unzip(in_path: PathLike, out_path: PathLike) -> None:
     with ZipFile(in_path, "r") as zipf:
         zipf.extractall(out_path)
 
 
-def targz_dir(in_dir: StrOrPath, out_path: StrOrPath):
+def targzdir(in_dir: PathLike, out_path: PathLike) -> None:
     make_archive(str(out_path), "zip", in_dir)
     entries = os.listdir(in_dir)
 

@@ -1,9 +1,41 @@
-line-length = 120
+line-length = 89
 indent-width = 4
 cache-dir = "./.cache/ruff"
 
+# https://docs.astral.sh/ruff/rules/
 [lint]
-ignore = ["E731", "F401"]
+select = [
+    "E",     # pycodestyle
+    "F",     # Pyflakes
+    "UP",    # pyupgrade
+    "ASYNC", # flake8-async
+    "ANN",   # flake8-annotations
+    "B",     # flake8-bugbear
+    "SIM",   # flake8-simplify
+    "TC",    # flake8-type-checking
+    "I",     # isort
+    "FAST",  # FastAPI
+    "RUF",   # Ruff-specific rules
+]
+ignore = [
+    "E731",
+    "F401",
+    "F403",
+    "RUF001",
+    "RUF002",
+    "RUF003",
+    "ANN204",
+    "ANN401",
+    "UP035",
+    "UP012",
+    "UP015",
+    "SIM103",
+    "SIM108",
+]
+
+[per-file-ignores]
+"app/routers/*" = ["ANN001", "B008"]
+"app/deps/*" = ["ANN001", "B008", "ANN202"]
 
 [format]
 quote-style = "double"

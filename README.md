@@ -36,6 +36,13 @@ Now you can run tasks for example with this command:
 pls start -mode=dev
 ```
 
+
+### Development Environment
+```sh
+pip install .
+pip install -e '.[dev]'
+```
+
 ---
 
 ### TODO

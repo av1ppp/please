@@ -1,15 +1,17 @@
-from pathlib import Path
-from sys import argv, exit
-from typing import Dict, Optional
 import importlib
 import sys
+import typing
+from pathlib import Path
+from sys import argv, exit
 
 sys.path.append("./")
 
 from importlib.metadata import version
 
 from .internal.taskcontext import TaskContext
-from .internal.taskfunc import TaskFunc
+
+if typing.TYPE_CHECKING:
+    from .internal.taskfunc import TaskFunc
 
 ver = version("please_av1ppp")
 
@@ -24,7 +26,7 @@ version_command = ["-v", "-version"]
 help_indent = "    "
 
 
-def main():
+def main() -> None:
     tasks = get_tasks_from_pleasefile()
     args = argv[1:]
 
@@ -49,7 +51,7 @@ def main():
     panic(f"Command or task '{args[0]}' not found. Try to use -h command.")
 
 
-def init_pleasefile():
+def init_pleasefile() -> None:
     if pleasefile_name.exists():
         panic("Pleasefile already created")
 
@@ -66,11 +68,11 @@ def start(ctx: please.TaskContext):
         )
 
 
-def print_version():
+def print_version() -> None:
     print("Please v" + ver)
 
 
-def print_help(tasks: Optional[Dict[str, TaskFunc]]):
+def print_help(tasks: dict[str, TaskFunc] | None) -> None:
     print("PLEASE - simple task runner.")
     print()
 
@@ -86,25 +88,25 @@ def print_help(tasks: Optional[Dict[str, TaskFunc]]):
             print(f"{help_indent}{task_name}")
 
 
-def get_tasks_from_pleasefile():
+def get_tasks_from_pleasefile() -> dict[str, TaskFunc] | None:
     try:
         module = importlib.import_module(pleasefile_module)
     except ModuleNotFoundError:
         return None
 
     try:
-        tasks: Dict[str, TaskFunc] = module.please.internal.tasks.tasks
+        tasks: dict[str, TaskFunc] = module.please.internal.tasks.tasks
     except AttributeError:
         return None
 
     return tasks
 
 
-def print_command(command: list, description: str):
+def print_command(command: list[str], description: str) -> None:
     print(help_indent + ", ".join(command).ljust(26, " ") + description)
 
 
-def panic(*values: object):
+def panic(*values: object) -> None:
     print("ERROR:", *values)
     exit(1)
 

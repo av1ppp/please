@@ -1,0 +1,22 @@
+{
+  "python.analysis.include": ["please"],
+  "python.analysis.diagnosticMode": "workspace",
+  "python.analysis.typeCheckingMode": "strict",
+  "python.analysis.diagnosticSeverityOverrides": {
+    "reportUnusedImport": "none",
+    "reportMissingParameterType": "none",
+    "reportMissingTypeStubs": "none",
+    "reportPrivateImportUsage": "none",
+    "reportUnknownMemberType": "none",
+    "reportUnknownVariableType": "none",
+    "reportUnknownArgumentType": "none"
+  },
+  "[python]": {
+    "editor.defaultFormatter": "charliermarsh.ruff",
+    "editor.codeActionsOnSave": {
+      "source.organizeImports": "explicit"
+      // "source.fixAll.ruff": "explicit"
+    }
+  },
+  "files.participants.timeout": 0
+}

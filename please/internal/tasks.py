@@ -1,5 +1,6 @@
-from typing import Dict
+import typing
 
-from .taskfunc import TaskFunc
+if typing.TYPE_CHECKING:
+    from .taskfunc import TaskFunc
 
-tasks: Dict[str, TaskFunc] = {}
+tasks: dict[str, TaskFunc] = {}

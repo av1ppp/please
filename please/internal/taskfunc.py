@@ -1,5 +1,5 @@
-from typing import Callable
+import typing
 
 from .taskcontext import TaskContext
 
-TaskFunc = Callable[[TaskContext], None]
+TaskFunc = typing.Callable[[TaskContext], None]

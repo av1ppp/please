@@ -1,11 +1,13 @@
-from typing import Optional
+import typing
 
-from .taskfunc import TaskFunc
 from .tasks import tasks
 
+if typing.TYPE_CHECKING:
+    from .taskfunc import TaskFunc
 
-def register_task(name: Optional[str] = None):
-    def decorator(func: TaskFunc):
+
+def register_task(name: str | None = None) -> typing.Callable[[TaskFunc], TaskFunc]:
+    def decorator(func: TaskFunc) -> TaskFunc:
         nonlocal name
 
         if name is None:

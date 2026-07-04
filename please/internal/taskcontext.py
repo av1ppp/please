@@ -7,10 +7,10 @@ _false_values = ["off", "no", "n", "false"]
 
 
 class TaskContext:
-    def __init__(self, args: List[str]) -> None:
+    def __init__(self, args: list[str]) -> None:
         self._args = parse_args(args)
 
-    def args(self) -> List[str]:
+    def args(self) -> list[str]:
         return list(
             map(
                 lambda arg: arg.value,
@@ -21,16 +21,16 @@ class TaskContext:
             )
         )
 
-    def string(self, key: str) -> Optional[str]:
+    def string(self, key: str) -> str | None:
         return self._find_by_key(key)
 
-    def muststring(self, key: str):
+    def muststring(self, key: str) -> str:
         value = self.string(key)
         if value is None:
             raise Exception(f"argument '{key}' must be specified")
         return value
 
-    def boolean(self, key: str) -> Optional[bool]:
+    def boolean(self, key: str) -> bool | None:
         value = self._find_by_key(key)
         if value is None:
             return None
@@ -40,45 +40,49 @@ class TaskContext:
             return False
         raise Exception(f"string '{value}' cannot be interpreted as a boolean value")
 
-    def mustboolean(self, key: str):
+    def mustboolean(self, key: str) -> bool:
         value = self.boolean(key)
         if value is None:
             raise Exception(f"argument '{key}' must be specified")
         return value
 
-    def integer(self, key: str) -> Optional[int]:
+    def integer(self, key: str) -> int | None:
         value = self._find_by_key(key)
         if value is None:
             return None
         try:
             value_ = int(value)
-        except ValueError:
-            raise Exception(f"string '{value}' cannot be interpreted as a int value")
+        except ValueError as e:
+            raise Exception(
+                f"string '{value}' cannot be interpreted as a int value"
+            ) from e
         return value_
 
-    def mustinteger(self, key: str):
+    def mustinteger(self, key: str) -> int:
         value = self.integer(key)
         if value is None:
             raise Exception(f"argument '{key}' must be specified")
         return value
 
-    def float(self, key: str) -> Optional[float]:
+    def float(self, key: str) -> float | None:
         value = self._find_by_key(key)
         if value is None:
             return None
         try:
             value_ = float(value)
-        except ValueError:
-            raise Exception(f"string '{value}' cannot be interpreted as a float value")
+        except ValueError as e:
+            raise Exception(
+                f"string '{value}' cannot be interpreted as a float value"
+            ) from e
         return value_
 
-    def mustfloat(self, key: str):
+    def mustfloat(self, key: str) -> float:
         value = self.float(key)
         if value is None:
             raise Exception(f"argument '{key}' must be specified")
         return value
 
-    def _find_by_key(self, key: str) -> Optional[str]:
+    def _find_by_key(self, key: str) -> str | None:
         for arg in self._args:
             if arg.key == key:
                 return arg.value
