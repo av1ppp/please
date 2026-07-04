@@ -5,7 +5,7 @@
     <img src="https://img.shields.io/pypi/v/please-av1ppp.svg?logo=pypi&logoColor=white" alt="Package version">
 </a>
 <a href="https://pypi.python.org/pypi/please-av1ppp" target="_blank">
-    <img src="https://img.shields.io/badge/python-%3E%3D3.8-green?style=flat&logo=python&logoColor=white" alt="Supported Python version">
+    <img src="https://img.shields.io/badge/python-%3E%3D3.14-green?style=flat&logo=python&logoColor=white" alt="Supported Python version">
 </a>
 </p>
 
