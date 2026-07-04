@@ -25,6 +25,7 @@ def parseenv(path: PathLike) -> Environment:
         value = split_line[1].strip()
         if "#" in value:
             value = value.split("#")[0]
+        value = value.strip()
 
         if value.startswith('"') and value.endswith('"'):
             value = value.strip('"')
