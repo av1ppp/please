@@ -11,7 +11,7 @@ class TaskContext:
         self._args = parse_args(args)
 
     def rawargs(self) -> list[str]:
-        return [arg.value for arg in self._args]
+        return [arg.raw for arg in self._args]
 
     def args(self) -> list[str]:
         return [arg.value for arg in self._args if arg.key is None]

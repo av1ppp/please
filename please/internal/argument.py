@@ -1,8 +1,9 @@
 from dataclasses import dataclass
 
 
-@dataclass()
+@dataclass(frozen=True, slots=True)
 class Argument:
+    raw: str
     key: str | None
     value: str
 
@@ -17,9 +18,9 @@ def parse_args(args: list[str]) -> list[Argument]:
                 value = ""
             else:
                 value = parts[1]
-            arg_ = Argument(key=parts[0], value=value)
+            arg_ = Argument(raw=arg, key=parts[0], value=value)
         else:
-            arg_ = Argument(key=None, value=arg)
+            arg_ = Argument(raw=arg, key=None, value=arg)
 
         result.append(arg_)
 
