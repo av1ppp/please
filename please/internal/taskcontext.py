@@ -10,16 +10,11 @@ class TaskContext:
     def __init__(self, args: list[str]) -> None:
         self._args = parse_args(args)
 
+    def rawargs(self) -> list[str]:
+        return [arg.value for arg in self._args]
+
     def args(self) -> list[str]:
-        return list(
-            map(
-                lambda arg: arg.value,
-                filter(
-                    lambda arg: arg.key is None,
-                    self._args,
-                ),
-            )
-        )
+        return [arg.value for arg in self._args if arg.key is None]
 
     def string(self, key: str) -> str | None:
         return self._find_by_key(key)
