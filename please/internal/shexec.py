@@ -15,6 +15,7 @@ def shexec(
     timeout: float | None = None,
     input: bytes | None = None,
     capture_output: bool = False,
+    shell: bool=True,
 ) -> CompletedProcess[bytes]:
     return subprocess_run(
         check=True,
@@ -24,7 +25,7 @@ def shexec(
         capture_output=capture_output,
         env=env,
         cwd=cwd,
-        shell=True,
+        shell=shell,
         stdout=None if capture_output else stdout,
         stderr=None if capture_output else stderr,
     )
@@ -35,7 +36,4 @@ def _build_args(args: list[PathLike] | PathLike) -> str:
         return args
     if isinstance(args, Path):
         return str(args)
-    cmd = ""
-    for arg in args:
-        cmd += str(arg) + " "
-    return cmd
+    return " ".join([str(v) for v in args])
