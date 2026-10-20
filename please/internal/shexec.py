@@ -15,10 +15,11 @@ def shexec(
     timeout: float | None = None,
     input: bytes | None = None,
     capture_output: bool = False,
-    shell: bool=True,
+    shell: bool = True,
+    check: bool = True,
 ) -> CompletedProcess[bytes]:
     return subprocess_run(
-        check=True,
+        check=check,
         input=input,
         timeout=timeout,
         args=_build_args(args),
